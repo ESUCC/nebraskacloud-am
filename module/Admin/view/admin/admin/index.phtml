@@ -1,0 +1,114 @@
+<div class="row">
+	<section class="col-sm-12">
+		<h2 class="text-center">Welcome Administrator</h2>
+		<br>
+		<h1 class="text-center">Administrator Home Page</h1>
+		<br>
+		<div class="col-sm-10 col-sm-offset-1">
+			<p>Welcome to the administrator home page. This webpage will provide you with 
+			the ability to create a new connector for your school district's directory
+			system, and create security questions for that district. To continue,
+			please select a function from the admin tab.</p>
+		</div>
+	</section>
+</div>
+
+<br>
+
+<div class="row">
+	<section class="col-sm-3 col-sm-offset-3">
+		<a
+			href="<?php
+echo $this->url('application/default', array(
+				'controller' => 'index',
+				'action' => 'claim-account'
+			));
+			?>"><button type="button" class="btn btn-default btn-lg">
+				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				Claim Account
+			</button></a>
+	</section>
+	<section class="col-sm-3">
+		<a
+			href="<?php
+
+echo $this->url('application/default', array(
+				'controller' => 'index',
+				'action' => 'password-reset'
+			));
+			?>"><button type="button" class="btn btn-default btn-lg">
+				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				Reset Password
+			</button></a>
+	</section>
+</div>
+
+<br>
+
+<div class="row">
+	<section class="col-sm-5 col-sm-offset-1">
+		<div class="panel panel-default">
+			<div class="panel-heading">My Activity</div>
+			<table class="table table-striped">
+				<tr>
+					<th>Timestamp</th>
+					<th>Action</th>
+					<th>Data</th>
+				</tr>
+				<tr>
+					<td>01/01/1997 08:00</td>
+					<td>Claimed Account</td>
+					<td>DATA</td>
+				</tr>
+				<tr>
+					<td>01/01/1997 08:00</td>
+					<td>Claimed Account</td>
+					<td>DATA</td>
+				</tr>
+				<tr>
+					<td>01/01/1997 08:00</td>
+					<td>Claimed Account</td>
+					<td>DATA</td>
+				</tr>
+				<tr>
+					<td>01/01/1997 08:00</td>
+					<td>Claimed Account</td>
+					<td>DATA</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+
+	<section class="col-sm-5">
+		<div class="panel panel-default">
+			<div class="panel-heading">Errors</div>
+			<table class="table table-striped">
+				<tr>
+					<th>Timestamp</th>
+					<th>Error</th>
+					<th>Data</th>
+				</tr>
+				<tr>
+					<td>01/01/1997 08:00</td>
+					<td>Could not find user</td>
+					<td>DATA</td>
+				</tr>
+				<tr>
+					<td>01/01/1997 08:00</td>
+					<td>Invalid login credentials</td>
+					<td>DATA</td>
+				</tr>
+				<tr>
+					<td>01/01/1997 08:00</td>
+					<td>Invalid login credentials</td>
+					<td>DATA</td>
+				</tr>
+				<tr>
+					<td>01/01/1997 08:00</td>
+					<td>404- could not find page</td>
+					<td>DATA</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+</div>

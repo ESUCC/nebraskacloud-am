@@ -1,0 +1,56 @@
+<?php
+use Zend\Session\Container;
+
+?>
+<ul class="nav navbar-nav">
+    <?php foreach ($this->container as $page) {
+        /* @var $page Zend\Navigation\Page\Mvc */
+        // when using partials we need to manually check for ACL conditions
+        if (!$page->isVisible() || !$this->navigation()->accept($page)) { continue; }
+        //check if page is active and a title has been specified.
+        if($page->isActive() && $page->title){
+            $template = new Container('template');
+            $template->title = $page->title;
+        }
+        $hasChildren = $page->hasPages();
+        $stillHasChildren = false;
+        if($hasChildren){
+            foreach ($page->getPages() as $child) {
+                if($child->label && $child->label != ''){
+                    $stillHasChildren = true;
+                }
+            }
+        }
+        if (!$stillHasChildren) { ?>
+            <li>
+                <a href="<?php echo $page->getHref() ?>">
+                    <?php echo $this->translate($page->getLabel())?>
+                </a>
+            </li>
+        <?php } else { ?>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate($page->getLabel()) ?> <b class="caret"></b></a>
+	           <ul class="dropdown-menu">
+                   <?php
+                   foreach ($page->getPages() as $child) {
+                        // when using partials we need to manually check for ACL conditions
+                        if(!$child->isVisible() || !$this->navigation()->accept($child)) { continue; }
+                        //check if page is active and a title has been specified.
+                        if($child->isActive() && $child->title){
+                            $template = new Container('template');
+                            $template->title = $child->title;
+                        }
+                        if($child->label && $child->label != '') {
+                            ?>
+                            <li>
+                                <a href="<?php echo $child->getHref() ?>">
+                                    <?php echo $this->translate($child->getLabel());?>
+                                </a>
+                            </li>
+                        <?php
+                        }
+                    }?>
+                </ul>
+            </li>
+        <?php } ?>
+    <?php } ?>
+</ul>

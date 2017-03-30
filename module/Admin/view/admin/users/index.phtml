@@ -1,0 +1,256 @@
+<?php
+/**
+ * @var $this \Zend\View\Helper\ViewModel
+ */
+?>
+
+<section class="col-sm-12">
+	<h1 class="text-center">Admin Users</h1>
+	<div class="col-sm-10 col-sm-offset-1">
+		<p>Welcome to the super administrator page. Here you can create new admin accounts
+		for school district administrators. These administrators will be able to
+		create connectors for their school district. You can also add existing school
+		district connectors to new administrator accounts.</p>
+	</div>
+</section>
+
+<!-- Modal -->
+<?php echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($this->formyform);?>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+			       		<?php echo $this->formCollection($this->formyform); ?>
+			       	</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" name="submit" id="submitbutton"
+					class="btn btn-primary submit-button has-spinner" value="Submit">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+<?php echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->closeTag($this->formyform);?>
+
+<h2>Users</h2>
+<a href="#launch modal" data-toggle="modal" data-target="#myModal">Add
+	User</a>
+<section class="row">
+
+ 	<?php
+
+		foreach ($this->users as $user) {
+			/**
+			 *
+			 * @var $user \Application\Model\User
+			 */
+			$connectorsCount = isset($this->connectors[$user->getId()]) ? count($this->connectors[$user->getId()]) : 0;
+			?>
+ 		<div class="col-sm-6">
+		<h3><?php echo $user->getFirstname() . " " . $user->getLastname();?> <a
+				href="#delete-<?php echo $user->getId()?>" data-toggle="modal"
+				data-target="#delete-<?php echo str_replace(' ', '-', $user->getId());?>">
+				<span class="glyphicon glyphicon-trash"
+				style="float: right; font-size: .8em; margin-left: 10px;"
+				aria-hidden="true"></span>
+			</a> <span class="glyphicon glyphicon-pencil"
+				style="float: right; font-size: .8em;" aria-hidden="true"></span>
+		</h3>
+		<div class="panel panel-default">
+			<div class="panel-heading">Connectors (<?php echo $connectorsCount;?>) <a
+					href="#add-connector-<?php echo str_replace(' ', '-', $user->getId());?>"
+					class="btn btn-info btn-xs" style="float: right;"
+					data-toggle="modal"
+					data-target="#add-connector-<?php echo str_replace(' ', '-', $user->getId());?>"><span
+					class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+			</div>
+
+			<table class="table table-striped">
+						<?php
+			if ($connectorsCount > 0) {
+				foreach ($this->connectors[$user->getId()] as $connector) {
+
+					/**
+					 *
+					 * @var $connector \Application\Model\Connector
+					 */
+					?>
+									<tr>
+					<td><?php echo $connector->getHostname();?> (<?php echo $connector->getType();?>)
+										<a
+						href="#delete-connector-<?php echo str_replace(' ', '-', $user->getId()) . '-' . $connector->getId();?>"
+						data-toggle="modal"
+						data-target="#delete-connector-<?php echo str_replace(' ', '-', $user->getId()) . '-' . $connector->getId();?>">
+							<span class="glyphicon glyphicon-trash" style="float: right;"
+							aria-hidden="true"></span>
+					</a>
+				<?php
+					$this->deleteConnectorFromUserForm->setName("delete-connector-" . str_replace(' ', '-', $user->getId()) . '-' . $connector->getId() . "-form");
+					echo $this->form(null, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($this->deleteConnectorFromUserForm);
+					?>
+					<div class="modal fade in" tabindex="-1" role="dialog"
+							id="delete-connector-<?php echo str_replace(' ', '-', $user->getId()) . '-' . $connector->getId();?>"
+							aria-labelledby="delete-connector-<?php echo $user->getId() . '-' . $connector->getId();?>">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">Delete Connector From User - <?php echo $user->getId();?></h4>
+									</div>
+									<div class="modal-body">
+										<p>
+											Are you sure you want to remove access to
+											<code><? echo $connector->getHostname();?></code> from <?php echo $user->getId();?></p>
+										<div class="row">
+
+											<div class="col-sm-10 col-sm-offset-1">
+									       		<?php
+					/**
+					 *
+					 * @var $this->formyform \Admin\Form\AddConnectorToUserForm
+					 */
+					$this->deleteConnectorFromUserForm->setData(array(
+						'user-id' => $user->getId(),
+						'connector-id' => $connector->getId()
+					));
+					echo $this->formCollection($this->deleteConnectorFromUserForm);
+
+					?>
+									       	</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+										<button type="submit" name="submit" id="submitbutton"
+											class="btn btn-primary submit-button has-spinner"
+											value="Submit">Delete</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php
+					echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->closeTag($this->deleteConnectorFromUserForm);?>
+					</td>
+
+				</tr>
+
+				<?php
+				}
+			} else {
+				?>
+ 							<tr>
+					<td>No Connectors</td>
+				</tr><?php
+			}
+			?>
+					</table>
+
+		</div>
+	</div>
+
+		<?php echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($this->deleteUserForm);?>
+			<div class="modal fade"
+		id="delete-<?php echo str_replace(' ', '-', $user->getId());?>"
+		tabindex="-1" role="dialog"
+		aria-labelledby="delete-<?php echo $user->getId()?>">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Delete User - <?php echo $user->getId();?></h4>
+				</div>
+				<div class="modal-body">
+					<p>Are you sure you want to delete this user?</p>
+					<div class="row">
+
+						<div class="col-sm-10 col-sm-offset-1">
+						       		<?php
+			/**
+			 *
+			 * @var $this->formyform \Admin\Form\AddConnectorToUserForm
+			 */
+			$this->deleteUserForm->setData(array(
+				'user-id' => $user->getId()
+			));
+			echo $this->formCollection($this->deleteUserForm);
+			?>
+						       	</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" name="submit" id="submitbutton"
+						class="btn btn-primary submit-button has-spinner" value="Submit">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		<?php echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->closeTag($this->deleteUserForm);?>
+		<?php echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($this->addConnectorToUserForm);?>
+			<div class="modal fade"
+		id="add-connector-<?php echo str_replace(' ', '-', $user->getId());?>"
+		tabindex="-1" role="dialog"
+		aria-labelledby="delete-<?php echo $user->getId()?>">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Add Connector To User - <?php echo $user->getId();?></h4>
+				</div>
+				<div class="modal-body">
+					<p>Select a connector from the list of available and then click
+						'Save'</p>
+					<div class="row">
+
+						<div class="col-sm-10 col-sm-offset-1">
+
+						       		<?php
+			/**
+			 *
+			 * @var $this->addConnectorToUserForm \Admin\Form\AddConnectorToUserForm
+			 */
+			$this->addConnectorToUserForm->setData(array(
+				'user-id' => $user->getId()
+			));
+			echo $this->formCollection($this->addConnectorToUserForm);
+			?>
+						       	</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" name="submit" id="submitbutton"
+						class="btn btn-primary submit-button has-spinner" value="Submit">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		<?php echo $this->form(null,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->closeTag($this->addConnectorToUserForm);?>
+
+ 		<?php
+		}
+		?>
+
+</section>

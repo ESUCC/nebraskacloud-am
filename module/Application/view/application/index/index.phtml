@@ -1,0 +1,87 @@
+<div class="row">
+<section class="col-sm-12">
+	<h2 class="text-center">Welcome <?php echo $this->formattedUser ?> </h2>
+	<br>
+	<h1 class="text-center">Home Page</h1>
+	<br>
+	<div class="col-sm-10 col-sm-offset-1 text-center">
+        <p>Welcome to the Nebraska Schools Account Provisioning application.</p>
+	</div>
+</section>
+</div>
+
+<br>
+
+<div class="row">
+<!-- section class="col-sm-3 col-sm-offset-3">
+<a href=""><button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Claim Account
+</button></a>
+</section-->
+
+<section class="col-sm-4 col-sm-offset-4">
+<a href="<?php echo $this->url('application/default', array(
+	'controller' 	=> 'index',
+	'action'		=> 'password-reset',
+));?>"><button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Reset Password
+</button></a>
+</section>
+</div>
+
+<br>
+
+<div class="row">
+<section class="col-sm-5 col-sm-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">Your Activity</div>
+      <table class="table table-striped">
+          <tr> 
+             <th> Timestamp </th>
+             <th> Action </th>
+          </tr>
+          <?php
+                if (count($this->logs) > 0) {
+                    foreach ($this->logs as $log) {
+                        /**
+                         *
+                         * @var $log \Application\Model\Logger
+                         */
+                        ?>
+                     <tr>
+                         <td> <?php echo $log->getTimestamp();?>  </td>
+                         <td> <?php echo $log->getAction();?>  </td>
+                     </tr>
+          <?php } } ?>
+      </table>
+    </div>
+</section>
+
+<section class="col-sm-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">My Information</div>
+      <table class="table table-striped">
+      	  <tr>
+              <td>ID</td>
+              <td><?php echo $this->user->getId() ?></td>
+          </tr>
+			<tr>
+              <td>First Name</td>
+              <td><?php echo $this->user->getFirstname() ?></td>
+          </tr>
+		  <tr>
+              <td>Last Name</td>
+              <td><?php echo $this->user->getLastname() ?></td>
+          </tr>
+	 	   <tr>
+              <td>Username</td>
+              <td><?php echo $this->user->getUsername() ?></td>
+          </tr>
+	  	  <tr>
+              <td>Email</td>
+              <td><?php echo $this->user->getEmail() ?></td>
+          </tr>
+		</table>
+      </div>
+    </section>
+    </div>

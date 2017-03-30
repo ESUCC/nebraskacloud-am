@@ -1,0 +1,23 @@
+<section class="col-sm-12">
+	<h1 class="text-center">NSAP Claim Account</h1>
+	<div class="col-sm-10 col-sm-offset-1">
+        <p>Please fill in your personal information below in order to verify your 
+        identity. If you have problems with your claim account settings, please contact
+        your district administrator.</p>
+	</div>
+</section>
+
+
+
+<section class="col-sm-12">
+	<div class="col-sm-3 col-sm-offset-5">
+		<span class="glyphicon glyphicon-user" style ="font-size: 147px; outline: 1px solid black;" aria-hidden="true"></span>
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class="row">
+            <?php
+            echo $this->form($this->formyform, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL);
+            ?>
+        </div>
+	</div>
+</section>

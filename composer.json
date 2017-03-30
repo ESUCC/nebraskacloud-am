@@ -1,0 +1,20 @@
+{
+  "name" : "zendframework/skeleton-application",
+  "description" : "Skeleton Application for ZF2",
+  "require" : {
+    "php" : ">=5.3.3",
+    "zendframework/zendframework" : "2.5.3",
+    "neilime/zf2-twb-bundle" : "2.6.0",
+    "google/apiclient" : "1.1.7",
+    "zendframework/zend-ldap" : "2.6.0",
+    "swagger/edfi-client": "1.0.0"
+  },
+    "repositories" : [ {
+    "type" : "path",
+    "url" : "private/EdFi"
+  } ],
+
+  "license" : "BSD-3-Clause",
+  "keywords" : [ "framework", "zf2" ],
+  "homepage" : "http://framework.zend.com/"
+}

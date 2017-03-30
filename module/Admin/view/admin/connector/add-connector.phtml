@@ -1,0 +1,79 @@
+<section class="col-sm-12">
+	<h1 class="text-center">Add <?php echo $this->type;?> Connector</h1>
+	<div class="col-sm-10 col-sm-offset-1">
+		<p>Please input the settings for your school district's connector below. Please
+		note that there is a test button to test the settings for your new connector.
+		When your connector settings are complete, please select the add connector
+		button below. </p>
+	</div>
+</section>
+
+<section class="col-sm-12">
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class="row">
+            <?php
+												echo $this->form($this->formyform, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL);
+												?>
+        </div>
+	</div>
+</section>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="testStatusModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Testing Connector</h4>
+			</div>
+			<div class="modal-body">
+				<p>Status: <span id="testStatus">In Progress</span> <span id="testIcon" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+				<pre id="testMessages"></pre>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+
+<script>
+function launchTestModal(){
+	$('#testStatusModal').modal('show');
+	getCurrentStatus();
+}
+
+function getCurrentStatus(){
+	var url = '<?php echo $this->url('admin/default', array(
+		'controller' => 'connector',
+		'action' => 'test-connector-update',
+	));?>';
+	$.ajax({
+        type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url         : url, // the url where we want to POST
+        dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            $('#testMessages').text(data.data);
+			if(data.status){
+				$('#testStatus').text('Stopped');
+				$('#testIcon').removeClass('glyphicon-refresh');
+			} else {
+				$('#testIcon').removeClass('glyphicon-ok').addClass('glyphicon-refresh');
+				window.setTimeout(getCurrentStatus, '1000');
+			}
+
+        });
+}
+
+</script>

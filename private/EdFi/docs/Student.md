@@ -1,0 +1,51 @@
+# Student
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **string** | The unique identifier of the resource. | [optional] 
+**student_unique_id** | **string** | A unique alphanumeric code assigned to a student. | [optional] 
+**personal_title_prefix** | **string** | A prefix used to denote the title, degree, position, or seniority of the person. | [optional] 
+**first_name** | **string** | A name given to an individual at birth, baptism, or during another naming ceremony, or through legal change. | [optional] 
+**middle_name** | **string** | A secondary name given to an individual at birth, baptism, or during another naming ceremony. | [optional] 
+**last_surname** | **string** | The name borne in common by members of a family. | [optional] 
+**generation_code_suffix** | **string** | An appendage, if any, used to denote an individual&#39;s generation in his family (e.g., Jr., Sr., III). | [optional] 
+**maiden_name** | **string** | The person&#39;s maiden name. | [optional] 
+**sex_type** | **string** | A person&#39;&#39;s gender. | [optional] 
+**birth_date** | **\\DateTime** | The month, day, and year on which an individual was born. | [optional] 
+**birth_city** | **string** | The set of elements that capture relevant data regarding a person&#39;s birth, including birth date and place of birth. | [optional] 
+**birth_state_abbreviation_type** | **string** | The abbreviation for the name of the state (within the United States) or extra-state jurisdiction in which an individual was born. | [optional] 
+**date_entered_us** | **\\DateTime** | For students born outside of the U.S., the date the student entered the U.S. | [optional] 
+**multiple_birth_status** | **bool** | Indicator of whether the student was born with other siblings (i.e., twins, triplets, etc.) | [optional] 
+**profile_thumbnail** | **string** | ProfileThumbnail. | [optional] 
+**hispanic_latino_ethnicity** | **bool** | An indication that the individual traces his or her origin or descent to Mexico, Puerto Rico, Cuba, Central, and South America, and other Spanish cultures, regardless of race. The term, \&quot;Spanish origin,\&quot; can be used in addition to \&quot;Hispanic or Latino.\&quot; | [optional] 
+**old_ethnicity_type** | **string** | Previous definition of Ethnicity combining Hispanic/latino and race:  1 - American Indian or Alaskan Native  2 - Asian or Pacific Islander  3 - Black, not of Hispanic origin  4 - Hispanic  5 - White, not of Hispanic origin | [optional] 
+**economic_disadvantaged** | **bool** | An indication of inadequate financial condition of an individual&#39;s family, as determined by family income, number of family members/dependents, participation in public assistance programs, and/or other characteristics considered relevant by federal, state, and local policy. | [optional] 
+**school_food_services_eligibility_descriptor** | **string** | A unique identifier used as Primary Key, not derived from business logic, when acting as Foreign Key, references the parent table. | [optional] 
+**limited_english_proficiency_descriptor** | **string** | An indication that the student has sufficient difficulty speaking, reading, writing, or understanding the English language, as to require special English Language services. | [optional] 
+**displacement_status** | **string** | Indicates a state health or weather related event that displaces a group of students, and may require additional funding, educational, or social services. | [optional] 
+**login_id** | **string** | The login ID for the user; used for security access control interface. | [optional] 
+**birth_international_province** | **string** | For students born outside of the US, the Province or jurisdiction in which an individual is born. | [optional] 
+**citizenship_status_type** | **string** | A unique identifier used as Primary Key, not derived from business logic, when acting as Foreign Key, references the parent table. | [optional] 
+**birth_country_descriptor** | **string** | A unique identifier used as Primary Key, not derived from business logic, when acting as Foreign Key, references the parent table. | [optional] 
+**learning_style** | [**\Swagger\Client\Model\StudentLearningStyle**](StudentLearningStyle.md) | The student&#39;s relative preference to visual, auditory and tactile learning expressed as percentages. | [optional] 
+**addresses** | [**\Swagger\Client\Model\StudentAddress[]**](StudentAddress.md) | An unordered collection of studentAddresses.  The set of elements that describes an address, including the street address, city, state, and ZIP code. | [optional] 
+**characteristics** | [**\Swagger\Client\Model\StudentCharacteristic[]**](StudentCharacteristic.md) | An unordered collection of studentCharacteristics.  Reflects important characteristics of the student&#39;s home situation: Displaced Homemaker, Homeless, Immigrant, Migratory, Military Parent, Pregnant Teen, Single Parent, Unaccompanied Youth. | [optional] 
+**cohort_years** | [**\Swagger\Client\Model\StudentCohortYear[]**](StudentCohortYear.md) | An unordered collection of studentCohortYears.  The type and year of a cohort (e.g., 9th grade) the student belongs to as determined by the year that student entered a specific grade. | [optional] 
+**disabilities** | [**\Swagger\Client\Model\StudentDisability[]**](StudentDisability.md) | An unordered collection of studentDisabilities.  This type represents an impairment of body structure or function, a limitation in activities or a restriction in participation, as ordered by severity of impairment. | [optional] 
+**electronic_mails** | [**\Swagger\Client\Model\StudentElectronicMail[]**](StudentElectronicMail.md) | An unordered collection of studentElectronicMails.   | [optional] 
+**identification_codes** | [**\Swagger\Client\Model\StudentIdentificationCode[]**](StudentIdentificationCode.md) | An unordered collection of studentIdentificationCodes.  A coding scheme that is used for identification and record-keeping purposes by schools, social services or other agencies to refer to a student. | [optional] 
+**identification_documents** | [**\Swagger\Client\Model\StudentIdentificationDocument[]**](StudentIdentificationDocument.md) | An unordered collection of studentIdentificationDocuments.  Represents the valid document that a person uses for identification. | [optional] 
+**indicators** | [**\Swagger\Client\Model\StudentIndicator[]**](StudentIndicator.md) | An unordered collection of studentIndicators.  An indicator or metric computed for the student (e.g., at risk) to influence more effective education or direct specific interventions. | [optional] 
+**international_addresses** | [**\Swagger\Client\Model\StudentInternationalAddress[]**](StudentInternationalAddress.md) | An unordered collection of studentInternationalAddresses.  The set of elements that describes an address, including the street address and country for international students. | [optional] 
+**languages** | [**\Swagger\Client\Model\StudentLanguage[]**](StudentLanguage.md) | An unordered collection of studentLanguages.  Language(s) the individual uses to communicate. | [optional] 
+**other_names** | [**\Swagger\Client\Model\StudentOtherName[]**](StudentOtherName.md) | An unordered collection of studentOtherNames.  Other names (e.g., alias, nickname, previous legal name) associated with a person. | [optional] 
+**program_participations** | [**\Swagger\Client\Model\StudentProgramParticipation[]**](StudentProgramParticipation.md) | An unordered collection of studentProgramParticipations.  Key programs the student is participating in or receives services from. | [optional] 
+**races** | [**\Swagger\Client\Model\StudentRace[]**](StudentRace.md) | An unordered collection of studentRaces.  The general racial category which most clearly reflects the individual&#39;s recognition of his or her community or with which the individual most identifies. The data model allows for multiple entries so that each individual can specify all appropriate races. | [optional] 
+**telephones** | [**\Swagger\Client\Model\StudentTelephone[]**](StudentTelephone.md) | An unordered collection of studentTelephones.  The 10-digit telephone number, including the area code, for the person. | [optional] 
+**visas** | [**\Swagger\Client\Model\StudentVisa[]**](StudentVisa.md) | An unordered collection of studentVisas.  Describe the types of Visa that a non-U.S. citizen student holds. | [optional] 
+**_etag** | **string** | A unique system-generated value that identifies the version of the resource. | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
